@@ -4,7 +4,7 @@ import bookSearcher from './modules/SearchModule.js';
 
 let books: ExtendedBook[] | undefined;
 
-const getBooks = async (): Promise<ExtendedBook[]> => {
+const getBooks = async (): Promise<void> => {
   const mainUrl: string =
     'https://my-json-server.typicode.com/zocom-christoffer-wallenberg/books-api/books';
   try {
@@ -13,8 +13,6 @@ const getBooks = async (): Promise<ExtendedBook[]> => {
     const booksData: Book[] = await response.json();
 
     books = booksData.map((book) => createExtendedBook(book));
-
-    return books;
   } catch (error) {
     console.log(error);
   }
@@ -36,6 +34,6 @@ const libraryMaker = (): void => {
 };
 
 (async () => {
-  books = await getBooks();
+  await getBooks();
   libraryMaker();
 })();
