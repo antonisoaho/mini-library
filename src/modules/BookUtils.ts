@@ -16,8 +16,12 @@ const bookCreator = (book: ExtendedBook, info: string): HTMLDivElement => {
 
   bookElement.classList.add(info);
   bookElement.style.backgroundColor = book.color.value as string;
-  bookElement.setAttribute('data-title', book.title.value as string);
-  bookElement.setAttribute('data-author', book.author.value as string);
+  Object.assign(bookElement, {
+    'data-title': String(book.title.value),
+    'data-author': String(book.author.value),
+  });
+  // bookElement.setAttribute('data-title', book.title.value as string);
+  // bookElement.setAttribute('data-author', book.author.value as string);
 
   if (info === 'book') {
     bookElement.addEventListener('click', () => {
