@@ -15,9 +15,9 @@ const bookCreator = (book: ExtendedBook, info: string): HTMLDivElement => {
   }
 
   bookElement.classList.add(info);
-  bookElement.style.backgroundColor = book['color'];
-  bookElement.setAttribute('data-title', book.title.value);
-  bookElement.setAttribute('data-author', book.author.value);
+  bookElement.style.backgroundColor = book.color.value as string;
+  bookElement.setAttribute('data-title', book.title.value as string);
+  bookElement.setAttribute('data-author', book.author.value as string);
 
   if (info === 'book') {
     bookElement.addEventListener('click', () => {
@@ -38,21 +38,24 @@ const renderModalInfo = (book: ExtendedBook): HTMLDivElement => {
     button: document.createElement('div'),
   };
 
-  details.header.classList.add('details__header');
-  details.text.classList.add('details__text');
-  details.info.classList.add('details__info');
-  details.button.classList.add('details__button');
+  Object.keys(details).forEach((key) => {
+    details[key].classList.add(`details__${key}`);
+  });
 
   details.button.textContent = 'Oh, I want to read it!';
 
   for (const key in book) {
     if (book.hasOwnProperty(key)) {
-      const property: { value: any; htmlType: string; modalTitle: boolean; type: string } =
-        book[key];
+      const property: {
+        value: string | number;
+        htmlType: string;
+        modalTitle: boolean;
+        type: string;
+      } = book[key];
 
       if (property.htmlType) {
         const propertyElement = document.createElement(property.htmlType);
-        const value: string = property.value === null ? 'Unknown' : String(property.value);
+        const value: string = String(property.value);
         propertyElement.classList.add(`details--${key}`);
 
         let text: string = property.modalTitle

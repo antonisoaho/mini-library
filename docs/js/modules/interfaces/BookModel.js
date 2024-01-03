@@ -1,5 +1,12 @@
 const createExtendedBook = (book) => {
     const extendedBook = {
+        id: {
+            value: book.id,
+            htmlType: '',
+            bookPrint: false,
+            modalTitle: false,
+            type: '',
+        },
         title: {
             value: book.title,
             htmlType: 'h2',
@@ -29,7 +36,7 @@ const createExtendedBook = (book) => {
             type: 'info',
         },
         pages: {
-            value: book.pages,
+            value: book.pages || 'Unknown',
             htmlType: 'p',
             bookPrint: false,
             modalTitle: true,
@@ -49,7 +56,13 @@ const createExtendedBook = (book) => {
             modalTitle: true,
             type: 'info',
         },
-        color: book.color,
+        color: {
+            value: book.color,
+            htmlType: '',
+            bookPrint: false,
+            modalTitle: false,
+            type: '',
+        },
     };
     return extendedBook;
 };

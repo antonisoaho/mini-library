@@ -1,3 +1,11 @@
+type FieldConfig = {
+  value: string | number;
+  htmlType: string;
+  bookPrint: boolean;
+  modalTitle: boolean;
+  type: string;
+};
+
 interface Book {
   id: number;
   title: string;
@@ -10,43 +18,19 @@ interface Book {
   color: string;
 }
 
-interface ExtendedBook {
-  title: { value: string; htmlType: string; bookPrint: boolean; modalTitle: boolean; type: string };
-  author: {
-    value: string;
-    htmlType: string;
-    bookPrint: boolean;
-    modalTitle: boolean;
-    type: string;
-  };
-  publisher: {
-    value: string;
-    htmlType: string;
-    bookPrint: boolean;
-    modalTitle: boolean;
-    type: string;
-  };
-  year: { value: number; htmlType: string; bookPrint: boolean; modalTitle: boolean; type: string };
-  pages: {
-    value: number | null;
-    htmlType: string;
-    bookPrint: boolean;
-    modalTitle: boolean;
-    type: string;
-  };
-  plot: { value: string; htmlType: string; bookPrint: boolean; modalTitle: boolean; type: string };
-  audience: {
-    value: string;
-    htmlType: string;
-    bookPrint: boolean;
-    modalTitle: boolean;
-    type: string;
-  };
-  color: string;
-}
+type ExtendedBook = {
+  [K in keyof Book]: FieldConfig;
+};
 
 const createExtendedBook = (book: Book): ExtendedBook => {
   const extendedBook: ExtendedBook = {
+    id: {
+      value: book.id,
+      htmlType: '',
+      bookPrint: false,
+      modalTitle: false,
+      type: '',
+    },
     title: {
       value: book.title,
       htmlType: 'h2',
@@ -76,7 +60,7 @@ const createExtendedBook = (book: Book): ExtendedBook => {
       type: 'info',
     },
     pages: {
-      value: book.pages,
+      value: book.pages || 'Unknown',
       htmlType: 'p',
       bookPrint: false,
       modalTitle: true,
@@ -96,7 +80,13 @@ const createExtendedBook = (book: Book): ExtendedBook => {
       modalTitle: true,
       type: 'info',
     },
-    color: book.color,
+    color: {
+      value: book.color,
+      htmlType: '',
+      bookPrint: false,
+      modalTitle: false,
+      type: '',
+    },
   };
 
   return extendedBook;

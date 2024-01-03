@@ -9,7 +9,7 @@ const bookCreator = (book, info) => {
         }
     }
     bookElement.classList.add(info);
-    bookElement.style.backgroundColor = book['color'];
+    bookElement.style.backgroundColor = book.color.value;
     bookElement.setAttribute('data-title', book.title.value);
     bookElement.setAttribute('data-author', book.author.value);
     if (info === 'book') {
@@ -28,17 +28,16 @@ const renderModalInfo = (book) => {
         info: document.createElement('div'),
         button: document.createElement('div'),
     };
-    details.header.classList.add('details__header');
-    details.text.classList.add('details__text');
-    details.info.classList.add('details__info');
-    details.button.classList.add('details__button');
+    Object.keys(details).forEach((key) => {
+        details[key].classList.add(`details__${key}`);
+    });
     details.button.textContent = 'Oh, I want to read it!';
     for (const key in book) {
         if (book.hasOwnProperty(key)) {
             const property = book[key];
             if (property.htmlType) {
                 const propertyElement = document.createElement(property.htmlType);
-                const value = property.value === null ? 'Unknown' : String(property.value);
+                const value = String(property.value);
                 propertyElement.classList.add(`details--${key}`);
                 let text = property.modalTitle
                     ? `${key === 'author'
