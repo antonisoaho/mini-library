@@ -6,7 +6,7 @@ type FieldConfig = {
   type: string;
 };
 
-interface Book {
+type Book = {
   id: number;
   title: string;
   author: string;
@@ -16,7 +16,7 @@ interface Book {
   plot: string;
   audience: string;
   color: string;
-}
+};
 
 type ExtendedBook = {
   [K in keyof Book]: FieldConfig;
