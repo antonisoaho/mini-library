@@ -1,4 +1,4 @@
-import { ExtendedBook } from './interfaces/BookModel.js';
+import { ExtendedBook, FieldConfig } from './interfaces/BookModel.js';
 import { DetailElement } from './interfaces/DetailElement.js';
 
 const bookCreator = (book: ExtendedBook, info: string): HTMLDivElement => {
@@ -47,12 +47,7 @@ const renderModalInfo = (book: ExtendedBook): HTMLDivElement => {
 
   for (const key in book) {
     if (book.hasOwnProperty(key)) {
-      const property: {
-        value: string | number;
-        htmlType: string;
-        modalTitle: boolean;
-        type: string;
-      } = book[key];
+      const property: FieldConfig = book[key];
 
       if (property.htmlType) {
         const propertyElement = document.createElement(property.htmlType);

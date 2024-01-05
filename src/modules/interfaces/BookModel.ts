@@ -92,4 +92,4 @@ const createExtendedBook = (book: Book): ExtendedBook => {
   return extendedBook;
 };
 
-export { Book, createExtendedBook, ExtendedBook };
+export { Book, createExtendedBook, ExtendedBook, FieldConfig };
