@@ -10,10 +10,8 @@ const bookCreator = (book, info) => {
     }
     bookElement.classList.add(info);
     bookElement.style.backgroundColor = book.color.value;
-    Object.assign(bookElement, {
-        'data-title': String(book.title.value),
-        'data-author': String(book.author.value),
-    });
+    bookElement.setAttribute('data-title', book.title.value);
+    bookElement.setAttribute('data-author', book.author.value);
     if (info === 'book') {
         bookElement.addEventListener('click', () => {
             showModalInfo(book);
